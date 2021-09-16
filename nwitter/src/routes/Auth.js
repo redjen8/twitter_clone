@@ -3,7 +3,7 @@ import { useState } from "react";
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [newAccount, setNewAccount] = useState(true);
     const onChange = (event) => {
         const {
             target: {name, value},
@@ -17,6 +17,11 @@ const Auth = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        if (newAccount) {
+            // create new account
+        } else {
+            //log in
+        }
     };
 
     return (
@@ -24,7 +29,7 @@ const Auth = () => {
             <form onSubmit={onSubmit}>
                 <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange}/>
                 <input name="password" type="password" placeholder="Password" required value={password} onChange={onChange}/>
-                <input type="submit" placeholder="Log In" required />
+                <input type="submit" value={newAccount ? "Create Account" : "Log in"}/>
             </form>
             <div>
                 <button>Continue with Google</button>

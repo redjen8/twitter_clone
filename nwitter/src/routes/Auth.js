@@ -33,6 +33,7 @@ const Auth = () => {
             setError(error.message);
         }
     };
+    const toggleAccount = () => setNewAccount((prev) => !prev);
 
     return (
         <div>
@@ -42,6 +43,9 @@ const Auth = () => {
                 <input type="submit" value={newAccount ? "Create Account" : "Log in"}/>
                 {error}
             </form>
+            <span onClick={toggleAccount}>
+                {newAccount ? "Sign In" : "Create Account"}
+            </span>
             <div>
                 <button>Continue with Google</button>
                 <button>Continue with Github</button>

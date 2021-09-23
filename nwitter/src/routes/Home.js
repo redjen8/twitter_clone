@@ -7,9 +7,10 @@ const Home = () => {
 
     const getNweets = async () => {
         const dbNweets = await dbService.collection("nweets").get();
-        dbNweets.forEach((document) => 
-            setNweets((prev) => [document.data(), ...prev])
-        );
+        dbNweets.forEach((document) => {
+            const nweetObject = { ...document.data(), id:document.id};
+            setNweets((prev) => [nweetObject, ...prev])
+        });
     };
 
     useEffect(() => {
@@ -36,6 +37,7 @@ const Home = () => {
     };
 
     return (
+        <>
         <form onSubmit={onSubmit}>
             <input
             value={nweet}
@@ -46,6 +48,14 @@ const Home = () => {
             />
             <input type="submit" value="Nweet"/>
         </form>
+        <div>
+            {nweets.map((nweet) => (
+                <div key={nweet.id}>
+                    <h4>{nweet.text}</h4>
+                </div>
+            ))}
+        </div>
+        </>
     )
 }
 
